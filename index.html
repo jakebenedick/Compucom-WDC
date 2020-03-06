@@ -37,7 +37,7 @@
         var xhttp = new XMLHttpRequest();
 
         //Set request header to allow for external requests
-        xhttp.setRequestHeader("Access-Control-Allow-Origin");
+        xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
 
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
