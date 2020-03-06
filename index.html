@@ -37,7 +37,7 @@
         var xhttp = new XMLHttpRequest();
 
         //Set request header to allow for external requests
-        xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+        
 
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -48,6 +48,7 @@
             }
         };
         xhttp.open("GET", "https://iaas.service-now.com/api/now/table/incident?&active=true&assigned_to=&assignment_group=BAH IS ESD ASC", true, username, password);
+        xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
         xhttp.send();
 
         alert("Username: " + username + " | Password: " + password);
