@@ -16,20 +16,33 @@
             <input type="password" id="pass" name="password" minlength="8" required>
         </div>
         <button onclick="submit()">Submit</button>
+
+        <div id="xmlContent">
+            The xml content from Compucom will go here.
+        </div>
     </div>
 </body>
 <script>
     var usernname;
     var password;
 
-    function submit(){
+    function submit() {
         username = document.getElementById("username").value;
         password = document.getElementById("pass").value;
 
         xmlHTTPRequest(username, password);
     }
 
-    function xmlHTTPRequest(username, password){
+    function xmlHTTPRequest(username, password) {
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                document.getElementById("xmlContent").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("GET", "https://iaas.service-now.com/api/now/table/incident?&active=true&assigned_to=&assignment_group=BAH IS ESD ASC", true, username, password);
+        xhttp.send();
+
         alert("Username: " + username + " | Password: " + password);
     }
 
