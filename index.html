@@ -1,19 +1,69 @@
 <html>
-    <head>
-        Compucom WDC
-    </head>
-    <body>
-        <div id="api_login">
-            <div>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-            </div>
-            
-            <div>
-                <label for="pass">Password:</label>
-                <input type="password" id="pass" name="password"
-                       minlength="8" required>
-            </div>
+
+<head>
+    Compucom WDC
+</head>
+
+<body>
+    <div id="api_login">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
         </div>
-    </body>
+
+        <div>
+            <label for="pass">Password:</label>
+            <input type="password" id="pass" name="password" minlength="8" required>
+        </div>
+        <button onclick="submit()">Submit</button>
+    </div>
+</body>
+<script>
+    function submit(){
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("pass").value;
+
+        alert("Username: " + username + " | Password: " + password);
+    }
+
+    // Changes XML to JSON
+    function xmlToJson(xml) {
+
+        // Create the return object
+        var obj = {};
+
+        if (xml.nodeType == 1) { // element
+            // do attributes
+            if (xml.attributes.length > 0) {
+                obj["@attributes"] = {};
+                for (var j = 0; j < xml.attributes.length; j++) {
+                    var attribute = xml.attributes.item(j);
+                    obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                }
+            }
+        } else if (xml.nodeType == 3) { // text
+            obj = xml.nodeValue;
+        }
+
+        // do children
+        if (xml.hasChildNodes()) {
+            for (var i = 0; i < xml.childNodes.length; i++) {
+                var item = xml.childNodes.item(i);
+                var nodeName = item.nodeName;
+                if (typeof (obj[nodeName]) == "undefined") {
+                    obj[nodeName] = xmlToJson(item);
+                } else {
+                    if (typeof (obj[nodeName].push) == "undefined") {
+                        var old = obj[nodeName];
+                        obj[nodeName] = [];
+                        obj[nodeName].push(old);
+                    }
+                    obj[nodeName].push(xmlToJson(item));
+                }
+            }
+        }
+        return obj;
+    };
+</script>
+
 </html>
