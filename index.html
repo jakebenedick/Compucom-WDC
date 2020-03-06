@@ -26,6 +26,10 @@
         username = document.getElementById("username").value;
         password = document.getElementById("pass").value;
 
+        xmlHTTPRequest(username, password);
+    }
+
+    function xmlHTTPRequest(username, password){
         alert("Username: " + username + " | Password: " + password);
     }
 
