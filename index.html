@@ -40,6 +40,8 @@
             if (this.readyState == 4 && this.status == 200) {
                 // Typical action to be performed when the document is ready:
                 document.getElementById("xmlContent").innerHTML = xhttp.responseText;
+            }else{
+                document.getElementById("xmlContent").innerHTML = "An error ocurred."
             }
         };
         xhttp.open("GET", "https://iaas.service-now.com/api/now/table/incident?&active=true&assigned_to=&assignment_group=BAH IS ESD ASC", true, username, password);
