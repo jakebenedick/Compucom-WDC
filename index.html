@@ -35,6 +35,8 @@
 
     function xmlHTTPRequest(username, password) {
         var xhttp = new XMLHttpRequest();
+
+        //Set request header to allow for external requests
         xhttp.setRequestHeader("Access-Control-Allow-Origin");
 
         xhttp.onreadystatechange = function () {
